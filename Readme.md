@@ -1,66 +1,78 @@
-# Crud MVP WinForms
+# Ejercicio Desarrollador .NET BioMakers
 
-Sistema básico con operaciones CRUD hecha en .Net Framework 4.5 y SQL Server.
+Este proyecto es un sistema CRUD realizado en .Net Framework 4.5 y SQL Server, diseñado para gestionar artículos, categorías, y ahora órdenes y reportes mejorados.
 
-## ¿De qué trata esta aplicación? 
+## Introducción
 
-Este proyecto consiste en una pequeña aplicación de escritorio para sistemas Windows. La 
-cual permite el registro y actualización de Artículos y su agrupación por Categorías. Además
-tiene una sección de reportes donde se pueden visualizar los datos de manera clara y exportarlos
-a otros formatos.
+Para comenzar con este ejercicio, debes clonar el repositorio desde aquí:
+[https://github.com/BioMakers-net/crud-mvp-winforms.git](https://github.com/BioMakers-net/crud-mvp-winforms.git)
 
-## ¿Cómo ejecutar la aplicación?
+## Requisitos para ejecutar la aplicación localmente
 
-Para poder ejecutar el programa se requiere tener instalado los siguientes componentes
+Para ejecutar y desarrollar este proyecto, asegúrate de tener instalado lo siguiente:
 
-* [Runtime de .Net Framework 4.5](https://www.microsoft.com/es-ar/download/details.aspx?id=42642)
-* [SQL Server 2018/2019](https://www.microsoft.com/es-ar/download/details.aspx?id=101064)
-* Microsoft SQL Server Management Studio (SSMS) *(opcional)*
+1. **Visual Studio IDE 2019**
+   - Incluye los componentes de desarrollo de escritorio .NET durante la instalación.
 
-Una vez instalados seguir los siguientes pasos para probar la aplicación.
+2. **SQL Server 2018/2019**
+   - Necesario para gestionar la base de datos. Cualquier edición compatible (Developer, Express, etc.) servirá.
 
-1. Descargar la última versión del proyecto compilado [desde aquí](https://github.com/manuel-chinchi/crud-mvp-winforms/releases) y descomprimir
-en algún directorio.
-2. Abrir el script `db_squema_and_data.min.sql` desde SSMS y ejecutarlo
-para crear la base de datos.
-3. Abrir el archivo `crud-mvp-winforms.exe.config` y configurar la cadena de
-conexión a para que apunte a su base de datos local.
-4. Ejecutar el archivo `crud-mvp-winforms.exe` e interactuar, eso es todo.
+3. **Microsoft SQL Server Management Studio (SSMS) o alternativa de cliente SQL**
+   - Esencial para la administración de la base de datos.
 
-**ADICIONAL**
+4. **Sigue las instrucciones específicas del README en el repositorio de GitHub para configurar y ejecutar el proyecto.**
 
-*Si quiere probar la aplicación solamente sin tener que crear o configurar una
-base de datos SQL Server puede descargar [desde aquí](https://github.com/manuel-chinchi/crud-mvp-winforms/releases/tag/v1.0.1) una versión portable
-que usa SQLite.*
+## Instrucciones Generales
 
-## Arquitectura de la aplicación
+Una vez instalado el entorno necesario:
+- Clona el repositorio y crea un branch separado para trabajar.
+- Puedes hostear tu branch de forma privada y proporcionar acceso a vsiless@biomakers.net y amodia@biomakers.net para revisión.
 
-Esta aplicación cuenta con una estructura tipo Modelo-Vista-Presentador (MVP) 
-en la cual los presentadores conectan los modelos a las vistas mediante 
-los contratos correspondientes, en los presentadores se maneja toda la lógica
-de aplicación. 
-Ademá, la aplicación se encuentra separada en cinco capas (proyectos) para su mejor organización.
- 
- - **EntityLayer**: La capa que contiene los modelos de datos.
- - **DataLayer**: Es la capa de acceso a datos, contiene los repositorios y la configuración
- de la conexión a la base de datos.
- - **BussinesLayer**: La capa que contiene los servicios de la aplicación. 
- - **PresentationLayer**: Capa de presentación, se encarga de mostrar las vistas
-   e interactuar con los modelos. 
- - **TestLayer**: Es una capa adicional que contiene algunas pruebas relacionadas a la capa
- de *BussinesLayer*.
+## Ejercicios Evaluados
 
-## Entorno de desarollo
+### Ejercicio 0: Redireccionamiento de la Base de Datos
 
-* Visual Studio IDE 2019
-  * Configuración
-    * Cascadia Code ExtraLight (fuente)
-  * Extensiones
-    * Diseñador de informes RDLC de Microsoft para Visual Studio v15.3.1
-    * Git Diff Margin v3.12.1 (by Laurent Kempé)
-    * PowerShell Tools for Visual Studio v2024.1.0 (by Ironman Software)
-* Sublime Text
-* Greenshot (capturas de pantalla)
+Cambia la cadena de conexión en el proyecto a una con permisos de lectura y escritura que será proporcionada por correo.
+
+### Ejercicio 1: Reestructuración del Menú
+
+Agrega un botón "Orders" al menú. La nueva estructura del menú debe ser:
+1. Articles
+2. Categories
+3. Orders
+4. Reports
+
+### Ejercicio 2: Actualización del CRUD y la Tabla de Artículos
+
+**Objetivo**: Incluir el campo "Price" en la tabla "Articles" y ajustar las operaciones CRUD para manejar este nuevo campo.
+
+**Instrucciones**:
+1. Agregar el campo "Price" a la tabla "Articles".
+2. Actualizar las funciones de CRUD para permitir la inserción y actualización de precios, además de incluir estos en las lecturas.
+
+### Ejercicio 3: Desarrollo de CRUD para Órdenes
+
+**Objetivo**: Implementar operaciones CRUD para manejar órdenes que pueden incluir múltiples artículos.
+
+**Instrucciones**:
+1. **Campo Articles**: Permitir la selección de uno o más artículos al crear una orden.
+2. **Campo Number of Articles**: Permitir especificar la cantidad de cada artículo seleccionado.
+
+### Ejercicio 4 (OPCIONAL): Mejora de Reportes
+
+**Objetivo**: Añadir nuevas columnas y una línea de totales al reporte existente.
+
+**Instrucciones**:
+1. Añadir columna "Price".
+2. Añadir columna "Number of Articles Sold".
+3. Añadir una línea de "Total" al final del reporte para sumar y mostrar el total de artículos vendidos y el total monetario de las ventas.
+
+## Ambiente de Desarrollo
+
+- **IDE**: Visual Studio 2019
+- **Herramientas adicionales**:
+  - SQL Server Management Studio
+  - Cliente Git para control de versiones
 
 ## Diagrama de clases
 
@@ -88,18 +100,15 @@ Validaciones
     <img src="resources/screenshots/SuccessMessage-ArticleListView.png">
 </p>
 
+
 ## Licencia
-  GPL-3.0
 
+GPL-3.0
 
-## Referencias útiles
+## Referencias
 
-- [System.Configuration reference not found](https://stackoverflow.com/questions/4431034/configurationmanager-not-found)
-- [DataGridView using SortableBindingList](https://stackoverflow.com/questions/23661195/datagridview-using-sortablebindinglist)
-
-- MSTests utils
-  - [Documentacion MS](https://learn.microsoft.com/en-us/visualstudio/test/vstest-console-options?view=vs-2022)
-  - [Sample Export](https://stackoverflow.com/questions/56958300/how-do-i-save-test-results-from-test-explorer-in-visual-studio-2017)
+- Documentación oficial de Visual Studio y SQL Server.
+- Comunidades en línea como Stack Overflow para soporte técnico.
 
 - Others
   - https://www.youtube.com/watch?v=LULI64meTUs
