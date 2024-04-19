@@ -5,7 +5,7 @@ Este proyecto es un sistema CRUD realizado en .Net Framework 4.5 y SQL Server, d
 ## Introducción
 
 Para comenzar con este ejercicio, debes clonar el repositorio desde aquí:
-[https://github.com/BioMakers-net/crud-mvp-winforms.git](https://github.com/BioMakers-net/crud-mvp-winforms.git)
+[https://github.com/BioMakers-net/crud-mvp-winforms.git](https://github.com/BioMakers-net/challenge-net-biomakers.git)
 
 ## Requisitos para ejecutar la aplicación localmente
 
