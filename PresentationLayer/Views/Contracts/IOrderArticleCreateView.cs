@@ -8,23 +8,21 @@ using System.Threading.Tasks;
 
 namespace PresentationLayer.Views.Contracts
 {
-    public interface IArticleCreateView : IBaseView
+    public interface IOrderArticleCreateView : IBaseView
     {
         string Id { get; set; }
-        string NameA { get; set; }
-        string Description { get; set; }
-        string Stock { get; set; }
-        string Category { get; set; }
-        string Price { get; set; }
+        string NumberOfArticle {  get; set; }
+        string OrderId { get; set; }
         bool IsEditMode { get; set; }
         int ItemSelected { get; set; }
-        IEnumerable<Category> Categories { get; set; }
-        ArticleCreatePresenter Presenter { get; set; }
-
+        IEnumerable<Article> Articles { get; set; }
+        OrderArticleCreatePresenter Presenter { get; set; }
+        
         void CloseView();
         void ShowView();
 
         event EventHandler AcceptClick;
         event EventHandler CancelClick;
+
     }
 }

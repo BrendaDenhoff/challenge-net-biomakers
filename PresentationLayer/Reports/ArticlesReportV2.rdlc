@@ -194,6 +194,9 @@
             <TablixColumn>
               <Width>2.5cm</Width>
             </TablixColumn>
+			<TablixColumn>
+			  <Width>2.5cm</Width>
+			</TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
@@ -270,6 +273,42 @@
                     <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
+				  <TablixCell>
+					  <CellContents>
+						  <Textbox Name="colPrice">
+							  <CanGrow>true</CanGrow>
+							  <KeepTogether>true</KeepTogether>
+							  <Paragraphs>
+								  <Paragraph>
+									  <TextRuns>
+										  <TextRun>
+											  <Value>Price</Value>
+											  <Style>
+												  <FontWeight>Bold</FontWeight>
+												  <Color>White</Color>
+											  </Style>
+										  </TextRun>
+									  </TextRuns>
+									  <Style>
+										  <TextAlign>Center</TextAlign>
+									  </Style>
+								  </Paragraph>
+							  </Paragraphs>
+							  <Style>
+								  <Border>
+									  <Color>LightGrey</Color>
+									  <Style>Solid</Style>
+								  </Border>
+								  <BackgroundColor>CornflowerBlue</BackgroundColor>
+								  <PaddingLeft>2pt</PaddingLeft>
+								  <PaddingRight>2pt</PaddingRight>
+								  <PaddingTop>2pt</PaddingTop>
+								  <PaddingBottom>2pt</PaddingBottom>
+							  </Style>
+						  </Textbox>
+						  <rd:Selected>true</rd:Selected>
+					  </CellContents>
+				  </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -339,6 +378,39 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+				  <TablixCell>
+					  <CellContents>
+						  <Textbox Name="Price">
+							  <CanGrow>true</CanGrow>
+							  <KeepTogether>true</KeepTogether>
+							  <Paragraphs>
+								  <Paragraph>
+									  <TextRuns>
+										  <TextRun>
+											  <Value>=Fields!Price.Value</Value>
+											  <Style />
+										  </TextRun>
+									  </TextRuns>
+									  <Style>
+										  <TextAlign>Center</TextAlign>
+									  </Style>
+								  </Paragraph>
+							  </Paragraphs>
+							  <rd:DefaultName>Price</rd:DefaultName>
+							  <Style>
+								  <Border>
+									  <Color>LightGrey</Color>
+									  <Style>Solid</Style>
+								  </Border>
+								  <VerticalAlign>Middle</VerticalAlign>
+								  <PaddingLeft>2pt</PaddingLeft>
+								  <PaddingRight>2pt</PaddingRight>
+								  <PaddingTop>2pt</PaddingTop>
+								  <PaddingBottom>2pt</PaddingBottom>
+							  </Style>
+						  </Textbox>
+					  </CellContents>
+				  </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
@@ -347,6 +419,7 @@
           <TablixMembers>
             <TablixMember />
             <TablixMember />
+			<TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -513,6 +586,10 @@
         <Field Name="Stock">
           <DataField>Stock</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+		<Field Name="Price">
+          <DataField>Price</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

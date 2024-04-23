@@ -3,62 +3,54 @@ using PresentationLayer.Presenters;
 using PresentationLayer.Views.Contracts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
-    public partial class ArticleCreateView : Form, IArticleCreateView
+    public partial class OrderArticleCreateView : Form, IOrderArticleCreateView
     {
         public string Id { get; set; }
-        public string NameA
+        public string OrderId { get; set; }
+        public string NumberOfArticle
         {
-            get { return txtName.Text; }
-            set { txtName.Text = value; }
+            get { return txtNumberOfArticle.Text; }
+            set { txtNumberOfArticle.Text = value; }
         }
-        public string Description
+        public string Article
         {
-            get { return txtDescription.Text; }
-            set { txtDescription.Text = value; }
+            get { return cmbArticles.SelectedItem.ToString(); }
+            set { cmbArticles.SelectedItem = value; }
         }
-        public string Stock
-        {
-            get { return txtStock.Text; }
-            set { txtStock.Text = value; }
-        }
-        public string Category
-        {
-            get { return cmbCategories.SelectedItem.ToString(); }
-            set { cmbCategories.SelectedItem = value; }
-        }
-        public string Price
-        {
-            get { return txtPrice.Text; }
-            set { txtPrice.Text = value; }
-        }
+
         public bool IsEditMode { get; set; }
         public int ItemSelected
         {
-            get { return cmbCategories.SelectedIndex; }
-            set { cmbCategories.SelectedIndex = value; }
+            get { return cmbArticles.SelectedIndex; }
+            set { cmbArticles.SelectedIndex = value; }
         }
-        public IEnumerable<Category> Categories
+        public IEnumerable<Article> Articles
         {
             get
             {
-                var bs = (BindingSource)cmbCategories.DataSource;
-                var list = (IEnumerable<Category>)bs.DataSource;
+                var bs = (BindingSource)cmbArticles.DataSource;
+                var list = (IEnumerable<Article>)bs.DataSource;
                 return list;
             }
             set
             {
                 var bs = new BindingSource();
-                bs.DataSource = new SortableBindingList<Category>(value.ToList());
-                cmbCategories.DataSource = bs;
+                bs.DataSource = new SortableBindingList<Article>(value.ToList());
+                cmbArticles.DataSource = bs;
             }
         }
-        public ArticleCreatePresenter Presenter { get; set; }
+        public OrderArticleCreatePresenter Presenter { get; set; }
+
         public string Error { get; set; }
         public bool ShowError
         {
@@ -81,11 +73,11 @@ namespace PresentationLayer.Views
 
         private Timer _timer;
 
-        public ArticleCreateView()
+        public OrderArticleCreateView()
         {
             InitializeComponent();
             BindingEvents();
-            Presenter = new ArticleCreatePresenter(this);
+            Presenter = new OrderArticleCreatePresenter(this);
         }
 
         public void ShowView()
@@ -123,11 +115,12 @@ namespace PresentationLayer.Views
             _timer.Start();
         }
 
-        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtNumberOfArticle_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; 
+                e.Handled = true;
+             
             }
         }
     }

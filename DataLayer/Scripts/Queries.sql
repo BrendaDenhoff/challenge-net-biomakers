@@ -187,3 +187,191 @@ ALTER TABLE Articles ADD FOREIGN KEY (CategoryId) REFERENCES Categories(Id)
 
 ALTER TABLE Articles ADD DateCreated DATETIME NOT NULL DEFAULT GETDATE()
 ALTER TABLE Articles ADD DateUpdated DATETIME DEFAULT NULL
+
+
+--------CHALLENGE-----------
+ALTER TABLE Articles ADD Price DECIMAL(10,2)
+GO
+
+ALTER PROCEDURE InsertArticle 
+    @Name NVARCHAR(100),
+    @Description NVARCHAR(100),
+    @Stock INT,
+    @CategoryId INT,
+	@Price DECIMAL(10,2)
+AS
+INSERT INTO Articles
+VALUES (
+    @Name,
+    @Description,
+    @Stock,
+    SYSDATETIME(),
+    NULL,
+    @CategoryId,
+	@Price
+    )
+GO
+
+ALTER PROCEDURE UpdateArticle 
+    @Name NVARCHAR(100),
+    @Description NVARCHAR(100),
+    @Stock INT,
+    @Id INT,
+    @CategoryId INT,
+	@Price DECIMAL(10,2)
+AS
+UPDATE Articles
+SET Name = @Name,
+    Description = @Description,
+    Stock = @Stock,
+    DateUpdated = SYSDATETIME(),
+    CategoryId = @CategoryId,
+	Price = @Price
+WHERE Id = @Id
+GO
+
+CREATE TABLE Orders (
+    Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    DateCreated DATETIME NOT NULL
+)
+GO
+
+CREATE TABLE Orders_Article (
+    Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    DateCreated DATETIME NOT NULL,
+	OrderId INT NOT NULL,
+	ArticleId INT NOT NULL,
+	NumberOfArticle INT NOT NULL,
+	FOREIGN KEY (OrderId) REFERENCES [dbo].[Orders](Id),
+	FOREIGN KEY (ArticleId) REFERENCES [dbo].[Articles](Id)
+)
+GO
+
+CREATE PROCEDURE GetOrders
+AS
+SELECT *
+FROM Orders
+GO
+
+CREATE PROCEDURE InsertOrder
+AS
+INSERT INTO Orders
+VALUES (SYSDATETIME())
+GO
+
+CREATE PROCEDURE DeleteOrder
+	 @Id integer
+AS
+DELETE Orders_Article
+	WHERE OrderId = @Id
+DELETE Orders
+	WHERE Id = @Id
+GO
+
+CREATE PROCEDURE GetOrderArticlesByOrderId
+    @IdOrden INT
+AS
+SELECT Orders_Article.*,Articles.Name AS ArticleName, Articles.Description as ArticleDescription
+FROM Orders_Article 
+JOIN Articles ON Articles.Id = Orders_Article.ArticleId
+WHERE OrderId = @IdOrden
+GO
+
+CREATE PROCEDURE InsertOrderArticle 
+    @OrderId integer,
+    @ArticleId integer,
+    @NumberOfArticle INT
+AS
+INSERT INTO Orders_Article
+VALUES (
+	SYSDATETIME(),
+    @OrderId,
+    @ArticleId,
+    @NumberOfArticle
+    )
+GO
+
+CREATE PROCEDURE UpdateOrderArticle 
+    @ArticleId INT,
+    @NumberOfArticle INT,
+	@Id INT
+AS
+UPDATE Orders_Article
+SET ArticleId = @ArticleId,
+    NumberOfArticle = @NumberOfArticle
+WHERE Id = @Id
+GO
+
+CREATE PROCEDURE DeleteOrderArticle
+	 @Id integer
+AS
+DELETE Orders_Article
+WHERE Id = @Id
+GO
+
+CREATE PROCEDURE SearchOrder
+    @IncludeOrderNumber BIT,
+    @IncludeDate BIT,
+    @Search VARCHAR(100)
+AS
+SELECT
+    *
+FROM
+    Orders 
+WHERE
+    (
+        (@IncludeOrderNumber = 1 AND Id  LIKE '%' + @Search + '%')
+        OR
+        (@IncludeDate = 1 AND DateCreated LIKE '%' + @Search + '%')
+    )
+    AND
+    @Search <> ''
+GO
+
+CREATE PROCEDURE SearchOrderArticle
+    @IncludeArticleName BIT,
+    @IncludeArticleDescription BIT,
+    @Search VARCHAR(100),
+	@OrderId INT
+AS
+SELECT
+    Orders_Article.*, Articles.Name as ArticleName, Articles.Description as ArticleDescription
+FROM
+    Orders_Article
+JOIN Articles on Articles.Id = Orders_Article.ArticleId
+WHERE
+    (
+        (@IncludeArticleName = 1 AND Articles.Name  LIKE '%' + @Search + '%')
+        OR
+        (@IncludeArticleDescription = 1 AND Articles.Description LIKE '%' + @Search + '%')
+    )
+    AND
+    @Search <> '' AND @OrderId = OrderId
+GO
+
+CREATE PROCEDURE GetStockArticle
+    @IdArticle INT
+AS
+SELECT 
+    ISNULL(A.Stock - OA.TotalOrdered, A.Stock) AS Stock,
+	id
+FROM
+    Articles A
+LEFT JOIN (
+    SELECT
+        ArticleId,
+        SUM(NumberOfArticle) AS TotalOrdered
+    FROM
+        Orders_Article
+	WHERE ArticleId = @IdArticle
+    GROUP BY
+        ArticleId
+) OA ON OA.ArticleId = A.Id
+WHERE Id = @IdArticle
+GROUP BY
+	a.id,
+    A.Name,
+    A.Stock,
+	oa.TotalOrdered
+GO
+

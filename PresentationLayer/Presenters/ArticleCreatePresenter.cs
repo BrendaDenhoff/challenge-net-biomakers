@@ -5,8 +5,6 @@ using PresentationLayer.Views.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PresentationLayer.Presenters
 {
@@ -63,21 +61,20 @@ namespace PresentationLayer.Presenters
             if (_viewCreate.IsEditMode)
             {
                 _viewCreate.Categories = _categoryService.GetCategories();
-                _articleService.UpdateArticle(_viewCreate.NameA, _viewCreate.Description, _viewCreate.Stock.ToString(), _viewCreate.Id.ToString(), category.Id.ToString());
+                _articleService.UpdateArticle(_viewCreate.NameA, _viewCreate.Description, _viewCreate.Stock.ToString(), _viewCreate.Id.ToString(), category.Id.ToString(), _viewCreate.Price.ToString());
                 _viewCreate.Success = $"'Article id={_viewCreate.Id.ToString()}' has been updated.";
                 _viewCreate.ShowSuccess = true;
                 _viewCreate.IsEditMode = false;
             }
             else
             {
-                // TODO: mmm.. check this ¿_view.CategoryId property missing?
-                if (string.IsNullOrEmpty(_viewCreate.NameA))
+                if (string.IsNullOrEmpty(_viewCreate.NameA) || string.IsNullOrWhiteSpace(_viewCreate.Price))
                 {
-                    _viewCreate.Error = "The 'Name' field cannot be empty";
+                    _viewCreate.Error = $"The 'Name' or 'Price' field cannot be empty";
                     _viewCreate.ShowError = true;
                     return;
                 }
-                _articleService.CreateArticle(_viewCreate.NameA, _viewCreate.Description, _viewCreate.Stock.ToString(), category.Id.ToString());
+                _articleService.CreateArticle(_viewCreate.NameA, _viewCreate.Description, _viewCreate.Stock.ToString(), category.Id.ToString(), _viewCreate.Price.ToString());
                 _viewCreate.Success = $"The article '{_viewCreate.NameA}' has been created";
                 _viewCreate.ShowSuccess = true;
             }

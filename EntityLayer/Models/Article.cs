@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace EntityLayer.Models
 {
@@ -20,5 +17,6 @@ namespace EntityLayer.Models
         public string CategoryName { get; set; }
         //[Browsable(false)]
         public string CategoryId { get; set; }
+        public decimal Price { get; set; }
     }
 }

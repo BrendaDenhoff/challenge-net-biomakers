@@ -23,6 +23,7 @@ namespace PresentationLayer.Views
         public event EventHandler ArticlesClick;
         public event EventHandler CategoriesClick;
         public event EventHandler ReportsClick;
+        public event EventHandler OrdersClick;
 
         public MainView()
         {
@@ -31,6 +32,7 @@ namespace PresentationLayer.Views
             btnArticles.Click += delegate { ArticlesClick?.Invoke(this, EventArgs.Empty); };
             btnCategories.Click += delegate { CategoriesClick?.Invoke(this, EventArgs.Empty); };
             btnReports.Click += delegate { ReportsClick?.Invoke(this, EventArgs.Empty); };
+            btnOrders.Click += delegate { OrdersClick?.Invoke(this, EventArgs.Empty); };
             llbAbout.Click += delegate { System.Diagnostics.Process.Start("https://github.com/manuel-chinchi/crud-mvp-winforms?tab=readme-ov-file#crud-mvp-winforms"); };
 
             Presenter = new MainPresenter(this);

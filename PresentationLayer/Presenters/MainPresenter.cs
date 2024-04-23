@@ -12,20 +12,23 @@ namespace PresentationLayer.Presenters
     {
         IMainView _viewMain;
         IArticleListView _viewArticleList;
+        IOrderListView _viewOrderList;
         ICategoryListView _viewCategoryList;
         IReportView _viewReports;
 
-        public MainPresenter(IMainView view, IArticleListView viewArticleList, ICategoryListView viewCategoryList, IReportView viewReports)
+        public MainPresenter(IMainView view, IArticleListView viewArticleList, ICategoryListView viewCategoryList, IReportView viewReports, IOrderListView viewOrderList)
         {
             _viewMain = view;
             _viewMain.Presenter = this;
             _viewArticleList = viewArticleList;
             _viewCategoryList = viewCategoryList;
             _viewReports = viewReports;
+            _viewOrderList = viewOrderList;
 
             _viewMain.ArticlesClick += _viewMain_ArticlesClick;
             _viewMain.CategoriesClick += _viewMain_CategoriesClick;
             _viewMain.ReportsClick += _viewMain_ReportsClick;
+            _viewMain.OrdersClick += _viewMain_OrdersClick;
         }
 
         public MainPresenter(IMainView view)
@@ -35,10 +38,12 @@ namespace PresentationLayer.Presenters
             _viewArticleList = new ArticleListView();
             _viewCategoryList = new CategoryListView();
             _viewReports = new ReportView();
+            _viewOrderList = new OrderListView();
 
             _viewMain.ArticlesClick += _viewMain_ArticlesClick;
             _viewMain.CategoriesClick += _viewMain_CategoriesClick;
             _viewMain.ReportsClick += _viewMain_ReportsClick;
+            _viewMain.OrdersClick += _viewMain_OrdersClick;
         }
 
         private void _viewMain_ArticlesClick(object sender, EventArgs e)
@@ -54,6 +59,11 @@ namespace PresentationLayer.Presenters
         private void _viewMain_ReportsClick(object sender, EventArgs e)
         {
             _viewReports.ShowView();
+        }
+
+        private void _viewMain_OrdersClick(object sender, EventArgs e)
+        {
+            _viewOrderList.ShowView();
         }
     }
 }

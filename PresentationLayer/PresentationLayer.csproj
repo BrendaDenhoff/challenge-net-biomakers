@@ -75,15 +75,38 @@
     <Compile Include="Presenters\ArticleListPresenter.cs" />
     <Compile Include="Presenters\CategoryListPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Presenters\OrderArticleCreatePresenter.cs" />
+    <Compile Include="Presenters\OrderArticleListPresenter.cs" />
+    <Compile Include="Presenters\OrderListPresenter.cs" />
     <Compile Include="Presenters\ReportPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Views\Contracts\IOrderArticleCreateView.cs" />
+    <Compile Include="Views\OrderArticleCreateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OrderArticleCreateView.Designer.cs">
+      <DependentUpon>OrderArticleCreateView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ArticleCreateView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ArticleCreateView.Designer.cs">
       <DependentUpon>ArticleCreateView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contracts\IOrderArticleListView.cs" />
+    <Compile Include="Views\OrderArticleListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OrderArticleListView.Designer.cs">
+      <DependentUpon>OrderArticleListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OrderListView.Designer.cs">
+      <DependentUpon>OrderListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ArticleListView.cs">
       <SubType>Form</SubType>
@@ -109,6 +132,7 @@
     <Compile Include="Views\Contracts\ICategoryCreateView.cs" />
     <Compile Include="Views\Contracts\IArticleListView.cs" />
     <Compile Include="Views\Contracts\ICategoryListView.cs" />
+    <Compile Include="Views\Contracts\IOrderListView.cs" />
     <Compile Include="Views\Contracts\IReportView.cs" />
     <Compile Include="Views\MainView.cs">
       <SubType>Form</SubType>
@@ -136,8 +160,17 @@
     <EmbeddedResource Include="Reports\ArticlesReportV2.rdlc" />
     <EmbeddedResource Include="Reports\CategoriesReport.rdlc" />
     <EmbeddedResource Include="Reports\CategoriesReportV2.rdlc" />
+    <EmbeddedResource Include="Views\OrderArticleCreateView.resx">
+      <DependentUpon>OrderArticleCreateView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ArticleCreateView.resx">
       <DependentUpon>ArticleCreateView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrderArticleListView.resx">
+      <DependentUpon>OrderArticleListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrderListView.resx">
+      <DependentUpon>OrderListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ArticleListView.resx">
       <DependentUpon>ArticleListView.cs</DependentUpon>

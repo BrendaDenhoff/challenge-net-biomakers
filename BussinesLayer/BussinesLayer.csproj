@@ -46,6 +46,10 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\Contracts\IArticleService.cs" />
     <Compile Include="Services\Contracts\ICategoryService.cs" />
+    <Compile Include="Services\Contracts\IOrderArticleService.cs" />
+    <Compile Include="Services\Contracts\IOrderService.cs" />
+    <Compile Include="Services\OrderArticleService.cs" />
+    <Compile Include="Services\OrderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

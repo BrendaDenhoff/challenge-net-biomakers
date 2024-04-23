@@ -4,9 +4,6 @@ using DataLayer.Repositories.Contracts;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BussinesLayer.Services
 {
@@ -19,7 +16,7 @@ namespace BussinesLayer.Services
             return _articleRepository.GetAll();
         }
 
-        public void CreateArticle(string name, string description, string stock, string categoryId)
+        public void CreateArticle(string name, string description, string stock, string categoryId, string price)
         {
             stock = string.IsNullOrEmpty(stock) ? "0" : stock;
             _articleRepository.Insert(
@@ -28,11 +25,12 @@ namespace BussinesLayer.Services
                     Name = name,
                     Description = description,
                     Stock = Convert.ToInt32(stock),
-                    CategoryId = categoryId
+                    CategoryId = categoryId,
+                    Price = Convert.ToDecimal(price)
                 });
         }
 
-        public void UpdateArticle(string name, string description, string stock, string id, string categoryId)
+        public void UpdateArticle(string name, string description, string stock, string id, string categoryId, string price)
         {
             _articleRepository.Update(
                 new Article
@@ -41,7 +39,8 @@ namespace BussinesLayer.Services
                     Name = name,
                     Description = description,
                     Stock = Convert.ToInt32(stock),
-                    CategoryId = categoryId
+                    CategoryId = categoryId,
+                    Price = Convert.ToDecimal(price)
                 });
         }
 

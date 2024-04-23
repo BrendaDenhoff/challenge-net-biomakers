@@ -14,5 +14,6 @@ namespace PresentationLayer.Views.Contracts
         event EventHandler ArticlesClick;
         event EventHandler CategoriesClick;
         event EventHandler ReportsClick;
+        event EventHandler OrdersClick;
     }
 }
