@@ -88,7 +88,7 @@ namespace PresentationLayer.Presenters
                     return;
                 }
                 _orderArticleService.CreateOrderArticle(_viewCreate.OrderId, article.Id.ToString(), _viewCreate.NumberOfArticle.ToString());
-                _viewCreate.Success = $"The item '{article.Name}' has been added to the order";
+                _viewCreate.Success = $"The item '{article.Name}' has been added to the order. Total {article.Price * Convert.ToInt32(_viewCreate.NumberOfArticle)}";
                 _viewCreate.ShowSuccess = true;
             }
            
